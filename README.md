@@ -11,3 +11,28 @@ Functionalities:
 - performing sort records in order of title, read date and rating
 - prompting confirmation alert upon deletion
 
+PostgresSQL:
+database: capstone5
+Table: book_review
+SQL: CREATE TABLE book_review (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(100),
+  read_time DATE,
+  rating INTEGER,
+  isbn VARCHAR(20),
+  review TEXT
+);
+
+Folder Structure:
+/
+/public
+/public/image
+/public/style
+/view
+
+Installation:
+npm install
+
+Server startup:
+nodemon index.js
+
