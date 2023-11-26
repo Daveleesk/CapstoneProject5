@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Book Review</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+  <div class="reviewlist">
+    <h1>
+      <%= heading %>
+    </h1>
+
+    <% if (locals.post) { %>
+      <form id="editForm" method="post" action="/edit/post/<%=post.id%>">
+        <input type="text" name="title" value="<%=post.title %>">
+        <input type="text" name="isbn" value="<%=post.isbn %>">
+        <% var dateFormat = post.read_time.getFullYear() + "-" + (post.read_time.getMonth()+1) + "-" + post.read_time.getDate() %>
+        <input type="date" name="date" value="<%=dateFormat %>">
+        <textarea name="review" rows="10"><%=post.review %></textarea>
+        <select name="rating">
+          <% for(var i = 0; i <= 10; i++) { 
+            var selected = ( post.rating == i ) ? "selected" : "";
+            %>
+            <option value="<%= i %>" <%= selected%>><%= i %></option>
+          <% } %>
+        </select>
+        <button class="full-width" type="submit">
+          <%= submit %>
+        </button>
+      </form>
+      <% } else {%>
+        <form id="newPostForm" method="post" action="/new/post">
+          <input type="text" name="title" placeholder="Title" required>
+          <input type="text" name="isbn" placeholder="ISBN" required>
+          <input type="text" name="date" placeholder="Read Date"
+            onfocus="(this.type='date')"
+            onblur="(this.type='text')" required>
+          <textarea name="review" placeholder="Review" required rows="10"></textarea>
+          <select name="rating">
+            <option value="" data-display="Select">Rating</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+          <button class="full-width" type="submit">
+            <%= submit %>
+          </button>
+        </form>
+        <% } %>
+
+  </div>
+</body>
+
+</html>

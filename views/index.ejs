@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Book Review</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+</head>
+
+<body>
+  <div class="reviewlist">
+    <h1>My Book Review</h1>
+    <p>Sort by
+      <a class="sort" href="/book?sort=title">title</a>
+      <a class="sort" href="/book?sort=date">newest</a>
+      <a class="sort" href="/book?sort=rating">best</a>
+    </p>
+    <a id="newPostBtn" href="/new">New Book</a>
+    <ul id="postsList">
+      <% posts.forEach(post=> { %>
+        <li>
+          <div class="container">
+          <div>
+            <img src="/image/<%= post.isbn%>-M.jpg"/>
+          </div>
+          <div>
+            <h2>
+              <%=post.title%>
+            </h2>
+            <small>
+              Read Date: <%=post.read_time %>
+            </small>
+            <p>
+              Review: <%=post.review%>
+            </p>
+            <small>Rating: <%=post.rating%> / 10 </small>
+            <a class="edit" href="/edit/<%= post.id %>">Edit</a>
+            <a class="delete" onclick="return confirm_alert(this);" href="/delete/<%= post.id %>">Delete</a>
+          </div>
+          </div>
+        </li>
+        <% }); %>
+    </ul>
+  </div>
+
+</body>
+<script type="text/javascript">
+  function confirm_alert(node) {
+      return confirm("Please click on OK to continue.");
+  }
+</script>
+</html>
